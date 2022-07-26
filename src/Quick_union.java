@@ -2,10 +2,15 @@ import java.util.Arrays;
 
 public class Quick_union {
     private int[] id;
+    private int[] size;
     public Quick_union (int n) {
         id = new int [n];
         for (int i = 0; i < n; i++) {
             id[i] = i;
+        }
+        size = new int[n];
+        for (int i = 0; i < n; i++) {
+            size[i] = 1;
         }
     }
     public int count () {
@@ -22,10 +27,17 @@ public class Quick_union {
         int rootA = root(a);
         int rootB = root(b);
         if (rootA == rootB) {return;}
-        id[rootB] = rootA;
+        if (size[rootA] < size[rootB]) {
+            id[rootA] = rootB;
+            size[rootB] += size[rootA];
+        } else {
+            id[rootB] = rootA;
+            size[rootA] += size[rootB];
+        }
     }
     public void printOutArray () {
-        System.out.println(Arrays.toString(id));
+        System.out.println("id: "+Arrays.toString(id));
+        System.out.println("size: "+Arrays.toString(size));
     }
 
     public static void main (String[] arg) {
@@ -44,5 +56,6 @@ public class Quick_union {
         a.union(2,9);
         a.printOutArray();
         System.out.println(a.connected(0,3));
+        System.out.println(a.connected(9,3));
     }
 }
