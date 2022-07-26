@@ -17,6 +17,10 @@ public class Quick_union {
         return this.id.length;
     }
     public int root (int n) {
+        if (id[n] != id[id[n]]) {
+            size[id[n]] -= 1;
+            id[n] = id[id[n]];
+        }
         while (id[n] != n) {n = id[n];}
         return n;
     }
@@ -54,6 +58,10 @@ public class Quick_union {
         a.union(8,9);
         a.printOutArray();
         a.union(2,9);
+        a.printOutArray();
+        a.union(7,9);
+        a.printOutArray();
+        a.union(5,8);
         a.printOutArray();
         System.out.println(a.connected(0,3));
         System.out.println(a.connected(9,3));
